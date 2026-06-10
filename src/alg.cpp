@@ -40,9 +40,9 @@ void collectCallback(const std::string& word, int freq) {
 
 void printFreq(BST<std::string>& tree) {
   freqVector.clear();
-  
+
   tree.traverse(collectCallback);
-  
+
   std::sort(freqVector.begin(), freqVector.end(),
     [](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
       if (a.second != b.second) {
@@ -50,17 +50,17 @@ void printFreq(BST<std::string>& tree) {
       }
       return a.first < b.first;
     });
-  
+
   std::ofstream outFile("result/freq.txt");
   if (!outFile) {
     std::cout << "Cannot open result/freq.txt for writing!" << std::endl;
     return;
   }
-  
+
   for (const auto& wordFreq : freqVector) {
     std::cout << wordFreq.first << " " << wordFreq.second << std::endl;
     outFile << wordFreq.first << " " << wordFreq.second << std::endl;
   }
-  
+
   outFile.close();
 }
