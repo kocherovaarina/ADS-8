@@ -73,6 +73,13 @@ class BST {
     return copy;
   }
 
+  void traverseNode(Node* node, void (*callback)(const T&, int)) {
+    if (!node) return;
+    traverseNode(node->left, callback);
+    callback(node->key, node->count);
+    traverseNode(node->right, callback);
+  }
+
  public:
   BST() : root_(nullptr) {}
 
@@ -93,6 +100,10 @@ class BST {
   int search(const T& value) const { return searchNode(root_, value); }
 
   int depth() const { return depthNode(root_); }
+
+  void traverse(void (*callback)(const T&, int)) {
+    traverseNode(root_, callback);
+  }
 };
 
 #endif  // INCLUDE_BST_H_
